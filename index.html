@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoSphere | Green Chemistry & Sustainable Polymers</title>
+  <style>
+    :root {
+      --bg-1: #04140c;
+      --bg-2: #0a2418;
+      --bg-3: #123625;
+      --panel: rgba(10, 29, 20, 0.76);
+      --panel-strong: rgba(11, 34, 22, 0.94);
+      --line: rgba(146, 255, 193, 0.15);
+      --line-strong: rgba(146, 255, 193, 0.3);
+      --text: #edfff3;
+      --muted: #b8dec4;
+      --accent: #53ffa3;
+      --accent-2: #1bdd83;
+      --accent-3: #a8ffd6;
+      --gold: #ffe684;
+      --danger: #ff8c8c;
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.36);
+      --maxw: 1280px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 10%, rgba(83,255,163,0.16), transparent 24%),
+        radial-gradient(circle at 86% 14%, rgba(83,255,163,0.12), transparent 22%),
+        radial-gradient(circle at 52% 100%, rgba(24,130,79,0.22), transparent 34%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 45%, #071710 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, rgba(255,255,255,0.35), transparent 75%);
+      opacity: 0.24;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button, input, select { font: inherit; }
+
+    .container {
+      width: min(var(--maxw), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .glass {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-xl);
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(4, 18, 11, 0.78);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      min-height: 78px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 10px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--accent-3), var(--accent), #0a7d46);
+      box-shadow: 0 0 28px rgba(83,255,163,0.34);
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .logo::before {
+      content: "";
+      position: absolute;
+      inset: 10px 12px 12px 10px;
+      border-radius: 0 100% 0 100%;
+      background: rgba(255,255,255,0.26);
+      transform: rotate(-18deg);
+    }
+
+    .brand-copy strong {
+      display: block;
+      white-space: nowrap;
+      font-size: 1rem;
+    }
+
+    .brand-copy span {
+      display: block;
+      white-space: nowrap;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--muted);
+      border: 1px solid transparent;
+      transition: 0.24s ease;
+      font-size: 0.94rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--text);
+      border-color: var(--line);
+      background: rgba(83,255,163,0.08);
+    }
+
+    section {
+      padding: 84px 0;
+      position: relative;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      color: var(--accent-3);
+      background: rgba(83,255,163,0.08);
+      border: 1px solid var(--line);
+      margin-bottom: 16px;
+    }
+
+    h1, h2, h3, h4, p { margin-top: 0; }
+    h1 {
+      font-size: clamp(2.7rem, 6vw, 5.2rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      margin-bottom: 18px;
+      max-width: 11ch;
+    }
+    h2 {
+      font-size: clamp(1.95rem, 4vw, 3.05rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+    h3 { font-size: 1.2rem; margin-bottom: 10px; }
+
+    .lead, .muted {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #f4fff8 0%, var(--accent-3) 32%, var(--accent) 68%, #ddffef 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-grid,
+    .grid-2,
+    .grid-3,
+    .grid-4,
+    .quiz-layout,
+    .game-layout,
+    .timeline {
+      display: grid;
+      gap: 20px;
+    }
+
+    .hero-grid { grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr); }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .quiz-layout { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); align-items: start; }
+    .game-layout { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); align-items: start; }
+    .timeline { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .hero-copy, .hero-visual, .panel, .question-card, .score-card, .game-card,
+    .info-card, .sdg-card, .app-card, .principle-card, .timeline-card {
+      padding: 24px;
+      min-width: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-copy::before, .hero-visual::before,
+    .info-card::before, .sdg-card::before, .app-card::before,
+    .principle-card::before, .timeline-card::before,
+    .score-card::before, .game-card::before {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      right: -36px;
+      bottom: -36px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(83,255,163,0.14), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-copy::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      top: -60px;
+      right: -60px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(83,255,163,0.2), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .btn {
+      border: none;
+      padding: 14px 18px;
+      border-radius: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      color: #032312;
+      background: linear-gradient(135deg, var(--accent-3), var(--accent));
+      box-shadow: 0 14px 36px rgba(27,221,131,0.28);
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+    }
+
+    .hero-stats,
+    .result-grid,
+    .game-stats {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .stat-card, .mini-panel, .result-box, .insight-box {
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      min-width: 0;
+    }
+
+    .stat-card .num {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--accent-3);
+      margin-bottom: 6px;
+    }
+
+    .ecosystem {
+      position: relative;
+      min-height: 390px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.012));
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .ecosystem::before,
+    .ecosystem::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      translate: -50% -50%;
+      border-radius: 50%;
+      border: 1px dashed rgba(168,255,214,0.16);
+      animation: spin 18s linear infinite;
+    }
+
+    .ecosystem::before { width: 290px; height: 290px; }
+    .ecosystem::after { width: 190px; height: 190px; animation-direction: reverse; }
+
+    .planet {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      translate: -50% -50%;
+      width: 146px;
+      height: 146px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #e2fff0, #61ffb1 45%, #197b4c 75%, #0a4027 100%);
+      box-shadow: 0 0 38px rgba(83,255,163,0.25);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 20px;
+      z-index: 2;
+    }
+
+    .planet span { font-size: 0.85rem; color: #d8ffe8; }
+
+    .node {
+      position: absolute;
+      width: 96px;
+      min-height: 96px;
+      padding: 12px;
+      border-radius: 24px;
+      background: rgba(8, 30, 20, 0.9);
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      box-shadow: var(--shadow);
+      z-index: 3;
+      animation: floaty 4s ease-in-out infinite;
+    }
+
+    .node small { display: block; color: var(--muted); margin-top: 4px; }
+    .n1 { top: 14%; left: 11%; }
+    .n2 { top: 15%; right: 11%; animation-delay: 0.8s; }
+    .n3 { bottom: 14%; left: 13%; animation-delay: 1.5s; }
+    .n4 { bottom: 14%; right: 13%; animation-delay: 2.2s; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .chips {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(83,255,163,0.08);
+      border: 1px solid var(--line);
+      color: var(--accent-3);
+      font-size: 0.9rem;
+    }
+
+    .field-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--accent-3);
+      font-weight: 700;
+    }
+
+    select, input[type="number"], input[type="range"] {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      border-radius: 15px;
+      padding: 14px;
+      outline: none;
+    }
+
+    input[type="range"] {
+      padding: 0;
+      background: transparent;
+      accent-color: var(--accent);
+    }
+
+    .comparison-table {
+      display: grid;
+      gap: 12px;
+    }
+
+    .comparison-row {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .comparison-row > div {
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      padding: 14px 16px;
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .comparison-row .head {
+      color: var(--accent-3);
+      font-weight: 700;
+      background: rgba(83,255,163,0.05);
+    }
+
+    .pill {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      vertical-align: middle;
+      margin-left: 6px;
+      margin-top: 4px;
+    }
+
+    .pill.good { color: #c9ffe1; background: rgba(83,255,163,0.1); }
+    .pill.mid { color: var(--gold); background: rgba(255,230,132,0.08); }
+    .pill.bad { color: #ffb2b2; background: rgba(255,140,140,0.08); }
+
+    .result-box .title {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 8px;
+    }
+
+    .result-box .value {
+      font-size: 1.45rem;
+      font-weight: 800;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+
+    .meter {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .meter-bar {
+      height: 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .meter-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #3ff297 0%, #ffe684 60%, #ff8c8c 100%);
+      transition: width 0.6s ease;
+    }
+
+    .recommend {
+      margin-top: 16px;
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(83,255,163,0.11), rgba(255,255,255,0.02));
+      border: 1px solid var(--line-strong);
+      line-height: 1.7;
+    }
+
+    .icon-badge {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: rgba(83,255,163,0.1);
+      border: 1px solid var(--line);
+      color: var(--accent-3);
+      font-size: 1.35rem;
+      margin-bottom: 16px;
+    }
+
+    .step-tag {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: var(--accent-3);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .question-card, .score-card { min-width: 0; }
+
+    .options {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .option {
+      width: 100%;
+      text-align: left;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      cursor: pointer;
+      transition: 0.22s ease;
+    }
+
+    .option:hover { transform: translateY(-1px); border-color: var(--line-strong); }
+    .option.correct { background: rgba(83,255,163,0.12); color: #d2ffe7; }
+    .option.wrong { background: rgba(255,140,140,0.12); color: #ffd4d4; }
+
+    .quiz-progress {
+      height: 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      background: rgba(255,255,255,0.04);
+      margin-top: 14px;
+    }
+
+    .quiz-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-3));
+      transition: width 0.35s ease;
+    }
+
+    .score-big {
+      font-size: 3.4rem;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--accent-3);
+      margin: 8px 0 12px;
+    }
+
+    .score-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .mini-score {
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+    }
+
+    .game-canvas-wrap {
+      padding: 16px;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(13,52,34,0.82), rgba(8,24,16,0.96));
+    }
+
+    .game-stats {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 16px;
+    }
+
+    .footer {
+      padding: 36px 0 52px;
+      text-align: center;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes spin {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid, .grid-2, .grid-3, .grid-4, .quiz-layout, .game-layout, .timeline {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .container { width: min(var(--maxw), calc(100% - 18px)); }
+      .nav-inner { align-items: stretch; }
+      .nav-links { justify-content: flex-start; }
+      .hero-copy, .hero-visual, .panel, .question-card, .score-card, .game-card,
+      .info-card, .sdg-card, .app-card, .principle-card, .timeline-card { padding: 20px; }
+      .hero-stats, .result-grid, .game-stats { grid-template-columns: 1fr; }
+      h1 { max-width: 100%; }
+      .ecosystem { min-height: 330px; }
+      .planet { width: 124px; height: 124px; }
+      .node { width: 84px; min-height: 84px; font-size: 0.9rem; }
+      .brand-copy strong, .brand-copy span { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#home" class="brand">
+        <div class="logo"></div>
+        <div class="brand-copy">
+          <strong>EcoSphere</strong>
+          <span>Green Chemistry × Sustainable Polymers × Interactive Learning</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="#home" class="active">Home</a>
+        <a href="#learn">Learn</a>
+        <a href="#compare">Compare</a>
+        <a href="#calculator">Calculator</a>
+        <a href="#sdg">SDG</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#game">Bottle Smash</a>
+      </div>
+    </div>
+  </nav>
+
+  <section id="home">
+    <div class="container hero-grid">
+      <div class="glass hero-copy reveal">
+        <div class="eyebrow">🌿 Green Chemistry Innovations for Sustainable Polymers and Their Environmental Impact</div>
+        <h1>Build a <span class="gradient-text">Cleaner Packaging Future</span></h1>
+        <p class="lead">
+          This interactive website explores how green chemistry helps create sustainable polymers for packaging applications. Compare conventional plastics with eco-friendly alternatives, calculate environmental impact, test your understanding, and even play a fast-paced bottle-smash mini game built into the same experience.
+        </p>
+        <div class="hero-actions">
+          <a href="#calculator" class="btn btn-primary">Explore Impact Calculator</a>
+          <a href="#game" class="btn btn-secondary">Play Bottle Smash</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-card">
+            <div class="num">6+</div>
+            <div class="muted">Materials compared across biodegradability, source and packaging usage</div>
+          </div>
+          <div class="stat-card">
+            <div class="num">12</div>
+            <div class="muted">Green chemistry principles connected to sustainability thinking</div>
+          </div>
+          <div class="stat-card">
+            <div class="num">2</div>
+            <div class="muted">UN SDGs linked to real-world material choices and eco innovation</div>
+          </div>
+          <div class="stat-card">
+            <div class="num">100%</div>
+            <div class="muted">Responsive HTML, CSS and JavaScript prototype with advanced interactivity</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass hero-visual reveal">
+        <div class="ecosystem">
+          <div class="planet">
+            <div>
+              <strong>Eco Polymer</strong><br>
+              <span>Science for safer packaging</span>
+            </div>
+          </div>
+          <div class="node n1">🌱<small>Bio-Based</small></div>
+          <div class="node n2">⚗️<small>Green Design</small></div>
+          <div class="node n3">♻️<small>Better End-of-Life</small></div>
+          <div class="node n4">📦<small>Packaging Use</small></div>
+        </div>
+        <div class="mini-panel" style="margin-top:18px;">
+          <h3 style="margin-bottom:8px;">Visual Learning Insight</h3>
+          <p class="muted" style="margin-bottom:0;">Sustainable polymers are not defined by one property alone. Their value depends on feedstock, synthesis route, usage pattern, disposal condition and environmental persistence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="learn">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow">📘 Informative section</div>
+          <h2>Understand the Science Before You Compare</h2>
+          <p class="muted">This section makes the website useful for learning. It explains how sustainable polymers differ from traditional plastics and how green chemistry supports safer material innovation.</p>
+        </div>
+        <div class="chips">
+          <div class="chip">PET</div>
+          <div class="chip">HDPE</div>
+          <div class="chip">PLA</div>
+          <div class="chip">PHA</div>
+          <div class="chip">Starch Blend</div>
+          <div class="chip">Paper Composite</div>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="glass info-card reveal">
+          <div class="icon-badge">🧪</div>
+          <h3>What Green Chemistry Means</h3>
+          <p class="muted">Green chemistry focuses on designing products and processes that reduce hazardous substances, improve energy efficiency, use renewable feedstocks and support safer degradation pathways.</p>
+        </div>
+        <div class="glass info-card reveal">
+          <div class="icon-badge">🧬</div>
+          <h3>Why Sustainable Polymers Matter</h3>
+          <p class="muted">Conventional plastics can persist for hundreds of years. Sustainable polymers aim to reduce carbon burden, dependency on fossil feedstocks and long-term waste accumulation.</p>
+        </div>
+        <div class="glass info-card reveal">
+          <div class="icon-badge">🌍</div>
+          <h3>Environmental Impact View</h3>
+          <p class="muted">A material is not automatically eco-friendly just because it is bio-based. Real impact depends on production, transport, performance, reuse potential and end-of-life handling.</p>
+        </div>
+      </div>
+
+      <div class="timeline reveal" style="margin-top:20px;">
+        <div class="glass timeline-card">
+          <span class="step-tag">Step 01</span>
+          <h3>Raw Material Source</h3>
+          <p class="muted">Conventional plastics mostly come from petroleum, while sustainable polymers may come from biomass, cellulose or microbial sources.</p>
+        </div>
+        <div class="glass timeline-card">
+          <span class="step-tag">Step 02</span>
+          <h3>Polymer Synthesis</h3>
+          <p class="muted">Green chemistry encourages cleaner synthesis with fewer toxic reagents and lower energy demand.</p>
+        </div>
+        <div class="glass timeline-card">
+          <span class="step-tag">Step 03</span>
+          <h3>Packaging Application</h3>
+          <p class="muted">Different materials fit different uses such as bottles, trays, films, wraps, cups and delivery packaging.</p>
+        </div>
+        <div class="glass timeline-card">
+          <span class="step-tag">Step 04</span>
+          <h3>End-of-Life Path</h3>
+          <p class="muted">Recycling, composting or safe degradation strongly affect whether a packaging material is truly sustainable.</p>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top:20px;">
+        <div class="glass principle-card reveal"><div class="icon-badge">1</div><h3>Renewable Feedstocks</h3><p class="muted">Use plant-derived or biologically produced inputs to reduce fossil dependence.</p></div>
+        <div class="glass principle-card reveal"><div class="icon-badge">2</div><h3>Design for Degradation</h3><p class="muted">Create materials that can break down more safely under suitable conditions.</p></div>
+        <div class="glass principle-card reveal"><div class="icon-badge">3</div><h3>Waste Prevention</h3><p class="muted">Focus on preventing pollution at the design stage rather than managing large waste later.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="compare">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow">🧾 Interactive comparison</div>
+          <h2>Compare Two Packaging Materials</h2>
+          <p class="muted">Select any two materials to instantly compare source, biodegradability, decomposition period, packaging uses, carbon burden and eco score.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="glass panel reveal">
+          <div class="field-grid">
+            <div>
+              <label for="materialA">Material A</label>
+              <select id="materialA"></select>
+            </div>
+            <div>
+              <label for="materialB">Material B</label>
+              <select id="materialB"></select>
+            </div>
+          </div>
+        </div>
+        <div class="glass panel reveal">
+          <h3>Quick Comparison Insight</h3>
+          <p class="muted" id="compareInsight">Choose two materials to generate a sustainability insight.</p>
+        </div>
+      </div>
+
+      <div class="glass panel reveal" style="margin-top:20px;">
+        <div class="comparison-table" id="comparisonTable"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="calculator">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow">📊 Smart simulation section</div>
+          <h2>Plastic Impact Calculator + Green Alternative Recommender</h2>
+          <p class="muted">Select a packaging material, enter quantity, choose usage intensity and instantly visualize environmental impact. The system also suggests greener alternatives for learning and awareness.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="glass panel reveal">
+          <div class="field-grid">
+            <div>
+              <label for="calcMaterial">Packaging Material</label>
+              <select id="calcMaterial"></select>
+            </div>
+            <div>
+              <label for="calcQuantity">Number of Items</label>
+              <input type="number" id="calcQuantity" min="1" value="50" />
+            </div>
+            <div>
+              <label for="useScale">Usage Intensity: <span id="useScaleValue">Medium</span></label>
+              <input type="range" id="useScale" min="1" max="3" value="2" />
+            </div>
+            <button class="btn btn-primary" id="calculateBtn">Calculate Environmental Impact</button>
+          </div>
+        </div>
+
+        <div class="glass panel reveal">
+          <div class="result-grid">
+            <div class="result-box"><div class="title">Estimated CO₂ Impact</div><div class="value" id="co2Value">--</div></div>
+            <div class="result-box"><div class="title">Approx Decomposition Time</div><div class="value" id="decomposeValue">--</div></div>
+            <div class="result-box"><div class="title">Eco Score</div><div class="value" id="ecoScoreValue">--</div></div>
+            <div class="result-box"><div class="title">Material Category</div><div class="value" id="categoryValue">--</div></div>
+          </div>
+          <div class="meter">
+            <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px;">
+              <strong>Pollution Meter</strong>
+              <span class="muted" id="meterLabel">Awaiting calculation</span>
+            </div>
+            <div class="meter-bar"><div class="meter-fill" id="meterFill"></div></div>
+          </div>
+          <div class="recommend" id="recommendationBox">Select values and click <strong>Calculate Environmental Impact</strong> to see your recommendation.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sdg">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow">🎯 SDG reference</div>
+          <h2>How This Topic Connects to Sustainable Development Goals</h2>
+          <p class="muted">Sustainable polymers and green chemistry directly support wider environmental and industrial goals, especially responsible consumption and innovation-driven infrastructure.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="glass sdg-card reveal">
+          <div class="icon-badge">12</div>
+          <h3>SDG 12: Responsible Consumption and Production</h3>
+          <p class="muted">This project supports responsible consumption by helping users understand the difference between long-lasting petroleum-based plastics and greener alternatives. It promotes informed packaging choices, waste reduction and lifecycle thinking.</p>
+        </div>
+        <div class="glass sdg-card reveal">
+          <div class="icon-badge">9</div>
+          <h3>SDG 9: Industry, Innovation and Infrastructure</h3>
+          <p class="muted">Green polymer innovation supports cleaner industrial design. By comparing emerging materials like PLA and PHA, this website shows how chemistry can drive safer and more sustainable packaging systems.</p>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top:20px;">
+        <div class="glass app-card reveal"><div class="icon-badge">🛍</div><h3>Delivery Packaging</h3><p class="muted">Biodegradable films and blends can reduce pressure from conventional single-use bags in selected systems.</p></div>
+        <div class="glass app-card reveal"><div class="icon-badge">🥤</div><h3>Food Containers</h3><p class="muted">PLA-based cups and containers are commonly discussed as sustainable alternatives in short-life packaging.</p></div>
+        <div class="glass app-card reveal"><div class="icon-badge">📦</div><h3>Protective Packaging</h3><p class="muted">Fiber composites and coated paper materials can reduce the need for fully petroleum-based protective packaging.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="quiz">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow">🧠 Better quiz section</div>
+          <h2>Test Your Understanding</h2>
+          <p class="muted">Answer a set of questions on sustainable polymers, green chemistry and environmental impact. You’ll get a final score, performance summary and a learning remark at the end.</p>
+        </div>
+      </div>
+
+      <div class="quiz-layout">
+        <div class="glass question-card reveal">
+          <div class="eyebrow" id="questionNumber">Question 1 of 6</div>
+          <h3 id="questionText">Loading question...</h3>
+          <div class="options" id="optionsContainer"></div>
+          <div class="quiz-progress"><div class="quiz-progress-fill" id="quizProgressFill"></div></div>
+          <p class="muted" id="quizStatus" style="margin-top:14px;margin-bottom:0;">Choose an answer to continue.</p>
+        </div>
+
+        <div class="glass score-card reveal">
+          <div class="muted">Current quiz score</div>
+          <div class="score-big" id="scoreValue">0/6</div>
+          <p class="muted" id="scoreComment">Start answering to unlock your final learning result.</p>
+          <div class="score-list">
+            <div class="mini-score">✅ Correct answers build your sustainability score.</div>
+            <div class="mini-score">📘 Explanations appear after each answer for learning.</div>
+            <div class="mini-score">🏁 Final performance level appears when the quiz ends.</div>
+          </div>
+          <button class="btn btn-secondary" id="restartQuiz" style="margin-top:16px;">Restart Quiz</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="game">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow">🎮 Mini game section</div>
+          <h2>Bottle Smash: Hit the Plastic Bottles</h2>
+          <p class="muted">A playful section inspired by whack-style mini games. Plastic bottles pop up on the field. Hit them quickly to boost your eco score before time runs out.</p>
+        </div>
+      </div>
+
+      <div class="game-layout">
+        <div class="glass game-card reveal">
+          <h3>How to Play</h3>
+          <p class="muted">Press Start Game. Plastic bottles pop up in random positions. Click or tap them before they disappear. Each hit increases score. Missing too many bottles lowers your rhythm. It is a fun awareness section to keep users engaged with the website.</p>
+          <div class="game-stats">
+            <div class="mini-panel"><strong id="gameScore">0</strong><br><span class="muted">Score</span></div>
+            <div class="mini-panel"><strong id="gameTime">30</strong><br><span class="muted">Seconds</span></div>
+            <div class="mini-panel"><strong id="gameHits">0</strong><br><span class="muted">Hits</span></div>
+          </div>
+          <div class="hero-actions" style="margin-top:16px;">
+            <button class="btn btn-primary" id="startGameBtn">Start Game</button>
+            <button class="btn btn-secondary" id="stopGameBtn">Stop Game</button>
+          </div>
+          <p class="muted" id="gameMessage" style="margin-top:14px;margin-bottom:0;">Ready to clean up the plastic field?</p>
+        </div>
+
+        <div class="glass game-card reveal">
+          <div class="game-canvas-wrap">
+            <canvas id="gameCanvas" width="760" height="430"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <strong>EcoSphere</strong><br />
+      Advanced interactive prototype for green chemistry innovations in sustainable polymers and their environmental impact.
+    </div>
+  </footer>
+
+  <script>
+    const materials = {
+      PET: {
+        source: 'Petroleum-based',
+        biodegradable: 'No',
+        decompose: 450,
+        packaging: 'Bottles, trays, rigid food packaging',
+        carbon: 2.8,
+        score: 22,
+        category: 'Conventional plastic',
+        notes: 'Highly useful in packaging but persists for long periods if unmanaged.',
+        badge: 'bad'
+      },
+      HDPE: {
+        source: 'Petroleum-based',
+        biodegradable: 'No',
+        decompose: 500,
+        packaging: 'Bottles, caps, containers',
+        carbon: 2.3,
+        score: 28,
+        category: 'Conventional plastic',
+        notes: 'Strong and durable, but not naturally biodegradable.',
+        badge: 'bad'
+      },
+      PLA: {
+        source: 'Bio-based',
+        biodegradable: 'Industrial composting conditions',
+        decompose: 6,
+        packaging: 'Cups, takeaway containers, films',
+        carbon: 0.9,
+        score: 76,
+        category: 'Biopolymer',
+        notes: 'Lower fossil dependency and useful in selected packaging applications.',
+        badge: 'good'
+      },
+      PHA: {
+        source: 'Microbial / bio-based',
+        biodegradable: 'Yes, stronger natural degradability profile',
+        decompose: 4,
+        packaging: 'Films, specialty packaging, compostable items',
+        carbon: 0.7,
+        score: 86,
+        category: 'Advanced biopolymer',
+        notes: 'Excellent sustainability profile with promising end-of-life behavior.',
+        badge: 'good'
+      },
+      'Starch Blend': {
+        source: 'Plant-derived blend',
+        biodegradable: 'Yes, condition-dependent',
+        decompose: 5,
+        packaging: 'Carry bags, flexible packaging',
+        carbon: 1.0,
+        score: 72,
+        category: 'Biodegradable blend',
+        notes: 'Often explored for compostable shopping and packaging solutions.',
+        badge: 'good'
+      },
+      'Paper Composite': {
+        source: 'Cellulose / fiber-based',
+        biodegradable: 'Usually yes',
+        decompose: 2,
+        packaging: 'Wraps, boxes, inserts, sleeves',
+        carbon: 1.2,
+        score: 81,
+        category: 'Fiber-based packaging',
+        notes: 'Very useful for secondary packaging, though barrier properties vary.',
+        badge: 'mid'
+      }
+    };
+
+    const materialKeys = Object.keys(materials);
+    const materialA = document.getElementById('materialA');
+    const materialB = document.getElementById('materialB');
+    const calcMaterial = document.getElementById('calcMaterial');
+    const comparisonTable = document.getElementById('comparisonTable');
+    const compareInsight = document.getElementById('compareInsight');
+
+    function populateSelect(selectEl, defaultValue) {
+      materialKeys.forEach(key => {
+        const option = document.createElement('option');
+        option.value = key;
+        option.textContent = key;
+        selectEl.appendChild(option);
+      });
+      selectEl.value = defaultValue;
+    }
+
+    populateSelect(materialA, 'PET');
+    populateSelect(materialB, 'PLA');
+    populateSelect(calcMaterial, 'HDPE');
+
+    const compareFields = [
+      { label: 'Material Type', get: m => `<strong>${m}</strong> <span class="pill ${materials[m].badge}">${materials[m].category}</span>` },
+      { label: 'Source', get: m => materials[m].source },
+      { label: 'Biodegradability', get: m => materials[m].biodegradable },
+      { label: 'Approx Decomposition', get: m => materials[m].decompose > 12 ? `${materials[m].decompose} years` : `${materials[m].decompose} months–years` },
+      { label: 'Packaging Use', get: m => materials[m].packaging },
+      { label: 'Carbon Burden', get: m => `${materials[m].carbon.toFixed(1)} kg CO₂ / 100 items` },
+      { label: 'Eco Score', get: m => `${materials[m].score}/100` },
+      { label: 'Observation', get: m => materials[m].notes }
+    ];
+
+    function updateComparison() {
+      const a = materialA.value;
+      const b = materialB.value;
+      comparisonTable.innerHTML = '';
+      compareFields.forEach(field => {
+        const row = document.createElement('div');
+        row.className = 'comparison-row';
+        row.innerHTML = `
+          <div class="head">${field.label}</div>
+          <div>${field.get(a)}</div>
+          <div>${field.get(b)}</div>
+        `;
+        comparisonTable.appendChild(row);
+      });
+      let better = 'Both appear similar in this simplified comparison.';
+      if (materials[a].score > materials[b].score) better = `${a} appears more sustainable overall than ${b}.`;
+      if (materials[b].score > materials[a].score) better = `${b} appears more sustainable overall than ${a}.`;
+      compareInsight.textContent = `${better} The main differences come from feedstock origin, end-of-life behavior and carbon impact.`;
+    }
+
+    materialA.addEventListener('change', updateComparison);
+    materialB.addEventListener('change', updateComparison);
+    updateComparison();
+
+    const useScale = document.getElementById('useScale');
+    const useScaleValue = document.getElementById('useScaleValue');
+    const co2Value = document.getElementById('co2Value');
+    const decomposeValue = document.getElementById('decomposeValue');
+    const ecoScoreValue = document.getElementById('ecoScoreValue');
+    const categoryValue = document.getElementById('categoryValue');
+    const meterLabel = document.getElementById('meterLabel');
+    const meterFill = document.getElementById('meterFill');
+    const recommendationBox = document.getElementById('recommendationBox');
+    const scaleMap = { 1: 'Low', 2: 'Medium', 3: 'High' };
+
+    useScale.addEventListener('input', () => {
+      useScaleValue.textContent = scaleMap[useScale.value];
+    });
+
+    document.getElementById('calculateBtn').addEventListener('click', () => {
+      const selected = calcMaterial.value;
+      const qty = Math.max(1, Number(document.getElementById('calcQuantity').value || 1));
+      const scale = Number(useScale.value);
+      const material = materials[selected];
+      const co2 = (material.carbon * (qty / 100) * (0.75 + scale * 0.25)).toFixed(2);
+      const ecoScore = Math.max(1, Math.min(100, Math.round(material.score - (scale - 1) * 4 + (qty < 30 ? 4 : 0))));
+      const pollutionMeter = Math.max(5, Math.min(100, 100 - ecoScore));
+
+      let bestAlt = 'PHA';
+      if (selected === 'PET' || selected === 'HDPE') bestAlt = 'PLA';
+      if (selected === 'PLA') bestAlt = 'PHA';
+      if (selected === 'Paper Composite') bestAlt = 'Paper Composite';
+
+      co2Value.textContent = `${co2} kg`;
+      decomposeValue.textContent = material.decompose > 12 ? `${material.decompose} years` : `${material.decompose} months–years`;
+      ecoScoreValue.textContent = `${ecoScore}/100`;
+      categoryValue.textContent = material.category;
+      meterFill.style.width = `${pollutionMeter}%`;
+      meterLabel.textContent = pollutionMeter > 65 ? 'High pollution profile' : pollutionMeter > 35 ? 'Moderate pollution profile' : 'Lower pollution profile';
+
+      recommendationBox.innerHTML = `
+        <strong>Recommended alternative:</strong> <strong>${bestAlt}</strong><br><br>
+        <strong>Why it is better:</strong> ${materials[bestAlt].notes}<br>
+        <strong>Packaging use:</strong> ${materials[bestAlt].packaging}<br>
+        <strong>Learning point:</strong> Sustainable packaging is about balancing performance, feedstock choice and end-of-life impact rather than chasing a single “green” label.
+      `;
+    });
+
+    const quizData = [
+      {
+        q: 'Which material is most commonly known as a bio-based packaging polymer?',
+        options: ['PET', 'PLA', 'HDPE', 'PVC'],
+        answer: 1,
+        explain: 'PLA is a well-known bio-based polymer often discussed in sustainable packaging.'
+      },
+      {
+        q: 'Which green chemistry idea encourages the use of plant-based raw materials?',
+        options: ['Waste accumulation', 'Renewable feedstocks', 'Long persistence', 'Toxic stabilization'],
+        answer: 1,
+        explain: 'Renewable feedstocks reduce dependence on fossil-based resources.'
+      },
+      {
+        q: 'Why is it more accurate to say “degrades under suitable conditions” instead of “easily dissolves”?',
+        options: ['Because all materials dissolve in water', 'Because degradation depends on environment and material design', 'Because polymers cannot degrade', 'Because only paper degrades'],
+        answer: 1,
+        explain: 'Biodegradation often depends on industrial composting, moisture, microbes or other specific conditions.'
+      },
+      {
+        q: 'Which SDG focuses on responsible consumption and production?',
+        options: ['SDG 6', 'SDG 12', 'SDG 3', 'SDG 15'],
+        answer: 1,
+        explain: 'SDG 12 is directly linked to material efficiency, waste reduction and responsible use of resources.'
+      },
+      {
+        q: 'Which factor strongly affects the real environmental performance of a packaging material?',
+        options: ['Only color', 'Only shape', 'End-of-life handling', 'Only price'],
+        answer: 2,
+        explain: 'Recycling, composting, landfilling or leakage into the environment all change the final impact.'
+      },
+      {
+        q: 'Why is an interactive website useful for this chemistry project?',
+        options: ['It removes science from the topic', 'It helps users compare, calculate and learn actively', 'It is only decorative', 'It avoids real understanding'],
+        answer: 1,
+        explain: 'The website turns theory into an interactive learning model through comparison, scoring and visualization.'
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let locked = false;
+    const questionNumber = document.getElementById('questionNumber');
+    const questionText = document.getElementById('questionText');
+    const optionsContainer = document.getElementById('optionsContainer');
+    const quizStatus = document.getElementById('quizStatus');
+    const scoreValue = document.getElementById('scoreValue');
+    const scoreComment = document.getElementById('scoreComment');
+    const quizProgressFill = document.getElementById('quizProgressFill');
+
+    function updateScoreCard(final = false) {
+      scoreValue.textContent = `${score}/${quizData.length}`;
+      const percentage = Math.round((score / quizData.length) * 100);
+      if (!final) {
+        scoreComment.textContent = percentage < 34
+          ? 'You are building your understanding. Keep going.'
+          : percentage < 68
+            ? 'Good progress. You understand the basics well.'
+            : 'Strong performance so far. You clearly understand the topic.';
+      } else {
+        scoreComment.textContent = percentage >= 85
+          ? `Excellent work. Final score: ${percentage}%. You can explain sustainable polymers confidently.`
+          : percentage >= 60
+            ? `Good job. Final score: ${percentage}%. Your understanding is solid with room for refinement.`
+            : `Final score: ${percentage}%. Review the comparison and calculator sections to improve.`;
+      }
+    }
+
+    function renderQuestion() {
+      const item = quizData[currentQuestion];
+      locked = false;
+      questionNumber.textContent = `Question ${currentQuestion + 1} of ${quizData.length}`;
+      questionText.textContent = item.q;
+      optionsContainer.innerHTML = '';
+      quizStatus.textContent = 'Choose an answer to continue.';
+      quizProgressFill.style.width = `${(currentQuestion / quizData.length) * 100}%`;
+
+      item.options.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'option';
+        btn.textContent = option;
+        btn.addEventListener('click', () => handleAnswer(index));
+        optionsContainer.appendChild(btn);
+      });
+    }
+
+    function handleAnswer(selectedIndex) {
+      if (locked) return;
+      locked = true;
+      const item = quizData[currentQuestion];
+      const buttons = [...optionsContainer.querySelectorAll('.option')];
+
+      buttons.forEach((btn, index) => {
+        btn.disabled = true;
+        if (index === item.answer) btn.classList.add('correct');
+        if (index === selectedIndex && index !== item.answer) btn.classList.add('wrong');
+      });
+
+      if (selectedIndex === item.answer) {
+        score++;
+        quizStatus.textContent = `Correct. ${item.explain}`;
+      } else {
+        quizStatus.textContent = `Not quite. ${item.explain}`;
+      }
+
+      updateScoreCard(false);
+
+      setTimeout(() => {
+        currentQuestion++;
+        if (currentQuestion < quizData.length) {
+          renderQuestion();
+        } else {
+          finishQuiz();
+        }
+      }, 1500);
+    }
+
+    function finishQuiz() {
+      questionNumber.textContent = 'Quiz Complete';
+      questionText.textContent = 'You have completed the interactive sustainability quiz.';
+      optionsContainer.innerHTML = '';
+      quizStatus.textContent = 'Use Restart Quiz to try again and improve your score.';
+      quizProgressFill.style.width = '100%';
+      updateScoreCard(true);
+    }
+
+    document.getElementById('restartQuiz').addEventListener('click', () => {
+      currentQuestion = 0;
+      score = 0;
+      updateScoreCard(false);
+      renderQuestion();
+    });
+
+    updateScoreCard(false);
+    renderQuestion();
+
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const startGameBtn = document.getElementById('startGameBtn');
+    const stopGameBtn = document.getElementById('stopGameBtn');
+    const gameScoreEl = document.getElementById('gameScore');
+    const gameTimeEl = document.getElementById('gameTime');
+    const gameHitsEl = document.getElementById('gameHits');
+    const gameMessage = document.getElementById('gameMessage');
+
+    let gameRunning = false;
+    let gameScore = 0;
+    let gameHits = 0;
+    let gameTime = 30;
+    let bottles = [];
+    let gameAnimationId = null;
+    let spawnInterval = null;
+    let countdownInterval = null;
+
+    function resizeCanvasForDisplay() {
+      const rect = canvas.getBoundingClientRect();
+      const ratio = window.devicePixelRatio || 1;
+      const width = Math.floor(rect.width * ratio);
+      const height = Math.floor((rect.width * 430 / 760) * ratio);
+      if (canvas.width !== width || canvas.height !== height) {
+        canvas.width = width;
+        canvas.height = height;
+      }
+    }
+
+    function drawBackground() {
+      const w = canvas.width;
+      const h = canvas.height;
+      const grad = ctx.createLinearGradient(0, 0, 0, h);
+      grad.addColorStop(0, '#195b39');
+      grad.addColorStop(1, '#071912');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.fillStyle = 'rgba(255,255,255,0.04)';
+      for (let i = 0; i < 12; i++) {
+        ctx.beginPath();
+        ctx.arc((i + 0.5) * (w / 12), h * 0.18, 2 + (i % 3), 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.fillStyle = 'rgba(64, 255, 155, 0.12)';
+      ctx.fillRect(0, h * 0.78, w, h * 0.22);
+    }
+
+    function spawnBottle() {
+      if (!gameRunning) return;
+      const radius = Math.max(28, canvas.width * 0.045);
+      const x = radius + Math.random() * (canvas.width - radius * 2);
+      const y = radius + Math.random() * (canvas.height * 0.68 - radius * 2);
+      const life = 800 + Math.random() * 800;
+      bottles.push({ x, y, radius, bornAt: performance.now(), life, hit: false, pop: 0 });
+    }
+
+    function drawBottle(bottle, now) {
+      const age = now - bottle.bornAt;
+      const lifeProgress = Math.min(age / bottle.life, 1);
+      const pulse = 1 + Math.sin(now / 120) * 0.03;
+      const r = bottle.radius * pulse;
+
+      if (!bottle.hit) {
+        ctx.save();
+        ctx.translate(bottle.x, bottle.y);
+        ctx.scale(1, 1 - lifeProgress * 0.1);
+
+        ctx.fillStyle = 'rgba(90,255,170,0.12)';
+        ctx.beginPath();
+        ctx.arc(0, 0, r * 1.3, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#8fffd0';
+        ctx.fillRect(-r * 0.18, -r * 0.95, r * 0.36, r * 0.18);
+        ctx.fillStyle = '#6decb1';
+        ctx.beginPath();
+        ctx.roundRect(-r * 0.42, -r * 0.78, r * 0.84, r * 1.35, r * 0.22);
+        ctx.fill();
+
+        ctx.fillStyle = 'rgba(255,255,255,0.22)';
+        ctx.fillRect(-r * 0.24, -r * 0.52, r * 0.14, r * 0.82);
+        ctx.restore();
+      } else {
+        const popR = bottle.radius * bottle.pop;
+        ctx.strokeStyle = 'rgba(180,255,220,0.7)';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.arc(bottle.x, bottle.y, popR, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+    }
+
+    function renderGame(now = performance.now()) {
+      resizeCanvasForDisplay();
+      drawBackground();
+
+      bottles = bottles.filter(bottle => {
+        const age = now - bottle.bornAt;
+        if (bottle.hit) {
+          bottle.pop += 0.12;
+          drawBottle(bottle, now);
+          return bottle.pop < 1.6;
+        }
+        if (age > bottle.life) {
+          return false;
+        }
+        drawBottle(bottle, now);
+        return true;
+      });
+
+      ctx.fillStyle = 'rgba(236,255,243,0.92)';
+      ctx.font = `${Math.max(14, canvas.width * 0.018)}px Inter, sans-serif`;
+      ctx.fillText('Smash the plastic bottles before time runs out.', 18, 28);
+
+      if (gameRunning) {
+        gameAnimationId = requestAnimationFrame(renderGame);
+      }
+    }
+
+    function startGame() {
+      stopGame();
+      gameRunning = true;
+      gameScore = 0;
+      gameHits = 0;
+      gameTime = 30;
+      bottles = [];
+      gameScoreEl.textContent = '0';
+      gameHitsEl.textContent = '0';
+      gameTimeEl.textContent = '30';
+      gameMessage.textContent = 'Game started. Smash as many bottles as you can!';
+      spawnBottle();
+      spawnInterval = setInterval(spawnBottle, 550);
+      countdownInterval = setInterval(() => {
+        gameTime -= 1;
+        gameTimeEl.textContent = String(gameTime);
+        if (gameTime <= 0) endGame();
+      }, 1000);
+      renderGame();
+    }
+
+    function stopGame() {
+      gameRunning = false;
+      if (spawnInterval) clearInterval(spawnInterval);
+      if (countdownInterval) clearInterval(countdownInterval);
+      if (gameAnimationId) cancelAnimationFrame(gameAnimationId);
+      spawnInterval = null;
+      countdownInterval = null;
+      gameAnimationId = null;
+      renderGame();
+    }
+
+    function endGame() {
+      stopGame();
+      gameMessage.textContent = `Time over. Final score: ${gameScore} with ${gameHits} successful hits.`;
+    }
+
+    canvas.addEventListener('click', (event) => {
+      if (!gameRunning) return;
+      const rect = canvas.getBoundingClientRect();
+      const ratioX = canvas.width / rect.width;
+      const ratioY = canvas.height / rect.height;
+      const x = (event.clientX - rect.left) * ratioX;
+      const y = (event.clientY - rect.top) * ratioY;
+
+      for (let i = bottles.length - 1; i >= 0; i--) {
+        const bottle = bottles[i];
+        if (bottle.hit) continue;
+        const dx = x - bottle.x;
+        const dy = y - bottle.y;
+        if (Math.sqrt(dx * dx + dy * dy) <= bottle.radius) {
+          bottle.hit = true;
+          bottle.pop = 0.2;
+          gameScore += 10;
+          gameHits += 1;
+          gameScoreEl.textContent = String(gameScore);
+          gameHitsEl.textContent = String(gameHits);
+          gameMessage.textContent = 'Nice hit! Keep cleaning the plastic field.';
+          break;
+        }
+      }
+    });
+
+    startGameBtn.addEventListener('click', startGame);
+    stopGameBtn.addEventListener('click', () => {
+      stopGame();
+      gameMessage.textContent = 'Game stopped. Press Start Game to play again.';
+    });
+
+    resizeCanvasForDisplay();
+    renderGame();
+    window.addEventListener('resize', () => {
+      resizeCanvasForDisplay();
+      renderGame();
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const sections = [...document.querySelectorAll('section')];
+    window.addEventListener('scroll', () => {
+      let current = sections[0].id;
+      sections.forEach(section => {
+        const offset = section.offsetTop - 130;
+        const height = section.offsetHeight;
+        if (window.scrollY >= offset && window.scrollY < offset + height) current = section.id;
+      });
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+      });
+    });
+  </script>
+</body>
+</html>
